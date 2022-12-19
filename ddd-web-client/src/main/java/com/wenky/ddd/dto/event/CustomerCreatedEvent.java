@@ -1,6 +1,5 @@
 package com.wenky.ddd.dto.event;
 
-
 /**
  * CustomerCreatedEvent
  *
