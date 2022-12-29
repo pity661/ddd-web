@@ -1,0 +1,25 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: dubbo-provider
+  profiles:
+    active: dev
+
+custom:
+  name: wenky
+  age: 26
+
+# springboot actuator 监控
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+app:
+  config:
+    log:
+      level: info
+      path: /Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider
