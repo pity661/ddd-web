@@ -1,4 +1,4 @@
-### Entity
+### Entity domain layer
 
 gateway
 model

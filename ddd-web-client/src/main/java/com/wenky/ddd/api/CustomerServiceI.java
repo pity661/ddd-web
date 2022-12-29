@@ -6,6 +6,7 @@ import com.wenky.ddd.dto.CustomerAddCmd;
 import com.wenky.ddd.dto.CustomerListByNameQry;
 import com.wenky.ddd.dto.data.CustomerDTO;
 
+/** API接口类 */
 public interface CustomerServiceI {
 
     Response addCustomer(CustomerAddCmd customerAddCmd);

@@ -52,7 +52,8 @@ public class CustomerController {
 
     // curl -X POST "http://127.0.0.1:8080/query/customer?name=wenky&customerId=1+"
 
-    // curl -X POST http://127.0.0.1:8080/query/customer -d 'name=wenky&customerId=1' -H 'Content-Type:
+    // curl -X POST http://127.0.0.1:8080/query/customer -d 'name=wenky&customerId=1' -H
+    // 'Content-Type:
     // application/x-www-form-urlencoded'
     @PostMapping(value = "/query/customer")
     public MultiResponse<CustomerDTO> listCustomerByName1(
@@ -79,6 +80,8 @@ public class CustomerController {
 
     // curl -X GET http://127.0.0.1:8080/get/obj/customer -F 'name=wenky' -H 'Content-Type:
     // multipart/form-data'
+
+    // curl -G -d 'name=wenky' http://127.0.0.1:8080/get/obj/customer
     @GetMapping(value = "/get/obj/customer")
     public MultiResponse<CustomerDTO> listCustomerByName(
             CustomerListByNameQry customerListByNameQry) {

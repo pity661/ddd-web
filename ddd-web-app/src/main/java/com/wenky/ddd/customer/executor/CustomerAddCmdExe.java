@@ -6,6 +6,7 @@ import com.wenky.ddd.dto.CustomerAddCmd;
 import com.wenky.ddd.dto.data.ErrorCode;
 import org.springframework.stereotype.Component;
 
+/** 每个用户请求对应一个执行器 */
 @Component
 public class CustomerAddCmdExe {
 
