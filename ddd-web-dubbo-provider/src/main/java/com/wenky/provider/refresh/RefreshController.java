@@ -1,4 +1,4 @@
-package com.wenky.ddd.provider.refresh;
+package com.wenky.provider.refresh;
 
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -24,13 +24,13 @@ public class RefreshController {
 
     private final RefreshService refreshService;
 
-    // curl http://127.0.0.1:8080/name
+    // curl http://127.0.0.1:8081/name
     @GetMapping(value = "/name")
     public String name(HttpServletRequest request) {
         return name;
     }
 
-    // curl http://127.0.0.1:8080/all
+    // curl http://127.0.0.1:8081/all
     @GetMapping(value = "/all")
     public String all(HttpServletRequest request) {
         return refreshService.getProperties();

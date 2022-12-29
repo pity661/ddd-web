@@ -28,6 +28,8 @@
         </encoder>
     </appender>
 
+    <logger name="com.alibaba.dubbo" level="DEBUG"/>
+
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="APPLICATION" />

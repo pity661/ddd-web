@@ -1,4 +1,4 @@
-package com.wenky.ddd.provider.config;
+package com.wenky.provider.refresh.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

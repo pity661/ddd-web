@@ -4,7 +4,7 @@
     <!--定义参数,后面可以通过${APP_NAME}使用-->
     <property name="APP_NAME" value="start" />
     <property name="LOG_PATH" value="${user.home}/${APP_NAME}/logs" />
-    <property name="LOG_FILE" value="${LOG_PATH}/application.log" />
+    <property name="LOG_FILE" value="/Users/huwenqi/Documents/wenky/java/ddd-web/start/application.log" />
 
     <appender name="APPLICATION"
         class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -38,6 +38,8 @@
     <!--应用日志-->
     <!--这个logger没有指定appender，它会继承root节点中定义的那些appender-->
     <logger name="com.wenky.ddd" level="DEBUG"/>
+    <logger name="com.wenky.provider" level="DEBUG"/>
+    <logger name="org.apache.dubbo" level="DEBUG"/>
 
     <!--数据库日志-->
     <!--由于这个logger自动继承了root的appender，root中已经有stdout的appender了，自己这边又引入了stdout的appender-->

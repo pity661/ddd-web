@@ -4,8 +4,17 @@ server:
 spring:
   application:
     name: dubbo-consumer
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test
-    username: root
-    password: root
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/test
+#    username: root
+#    password: root
+
+dubbo:
+  application:
+    name: dubbo-consumer
+  protocol:
+    port: 21880
+    name: dubbo
+  registry:
+    address: nacos://localhost:8848

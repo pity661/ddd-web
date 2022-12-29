@@ -1,6 +1,6 @@
-package com.wenky.ddd.provider;
+package com.wenky.provider.refresh;
 
-import com.wenky.ddd.provider.config.CustomProperties;
+import com.wenky.provider.refresh.config.CustomProperties;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;

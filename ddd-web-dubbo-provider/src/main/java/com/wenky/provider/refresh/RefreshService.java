@@ -1,6 +1,6 @@
-package com.wenky.ddd.provider.refresh;
+package com.wenky.provider.refresh;
 
-import com.wenky.ddd.provider.config.CustomProperties;
+import com.wenky.provider.refresh.config.CustomProperties;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

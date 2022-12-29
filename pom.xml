@@ -17,12 +17,11 @@
         <maven.deploy.skip>true</maven.deploy.skip>
 
         <cola.components.version>4.3.1</cola.components.version>
-
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <!-- https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E-->
         <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
-
         <mybatis-starter.version>2.2.2</mybatis-starter.version>
+        <dubbo-registry-nacos.version>2.7.8</dubbo-registry-nacos.version>
     </properties>
 
     <modules>
@@ -37,6 +36,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
@@ -50,6 +54,11 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo-registry-nacos</artifactId>
+                <version>${dubbo-registry-nacos.version}</version>
+            </dependency>
             <!--  只需要在parent中配置dependencies依赖，nacos的config和discovery可以在子项目中直接引用 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
@@ -84,6 +93,11 @@
                 <artifactId>ddd-web-infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.wenky.cola.ddd.web</groupId>
+                <artifactId>ddd-web-dubbo-provider</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--Project modules End-->
 
             <dependency>
@@ -99,11 +113,6 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis-starter.version}</version>
             </dependency>
 
             <!--Validation API-->

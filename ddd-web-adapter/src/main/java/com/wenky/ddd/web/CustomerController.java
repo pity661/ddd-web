@@ -4,6 +4,7 @@ import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
 import com.alibaba.fastjson.JSON;
 import com.wenky.ddd.api.CustomerServiceI;
+import com.wenky.ddd.domain.customer.gateway.CustomerGateway;
 import com.wenky.ddd.dto.CustomerAddCmd;
 import com.wenky.ddd.dto.CustomerListByNameQry;
 import com.wenky.ddd.dto.data.CustomerDTO;
@@ -22,6 +23,13 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
 
     private final CustomerServiceI customerService;
+    private final CustomerGateway customerGateway;
+
+    // curl http://127.0.0.1:8080/cname
+    @GetMapping(value = "/cname")
+    public String getName(HttpServletRequest request) {
+        return customerGateway.getName();
+    }
 
     // curl http://127.0.0.1:8080/helloworld
     @GetMapping(value = "/helloworld")
