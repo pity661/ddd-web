@@ -22,6 +22,9 @@
         <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
         <mybatis-starter.version>2.2.2</mybatis-starter.version>
         <dubbo-registry-nacos.version>2.7.8</dubbo-registry-nacos.version>
+
+        <mysql-connector.version>8.0.22</mysql-connector.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
 
     <modules>
@@ -55,6 +58,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.apache.dubbo</groupId>
                 <artifactId>dubbo-registry-nacos</artifactId>
                 <version>${dubbo-registry-nacos.version}</version>
@@ -64,6 +72,20 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cola</groupId>
+                <artifactId>cola-components-bom</artifactId>
+                <version>${cola.components.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -100,21 +122,6 @@
             </dependency>
             <!--Project modules End-->
 
-            <dependency>
-                <groupId>com.alibaba.cola</groupId>
-                <artifactId>cola-components-bom</artifactId>
-                <version>${cola.components.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <!--Validation API-->
             <!--
                 - javax.validation:javax.validation
@@ -136,6 +143,18 @@
                 <version>1.2.83</version>
             </dependency>
             <!-- Misc End -->
+            <!-- mapstruct -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+            <!-- mapstruct end -->
         </dependencies>
     </dependencyManagement>
 

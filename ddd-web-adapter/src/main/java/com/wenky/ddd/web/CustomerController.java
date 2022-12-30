@@ -2,11 +2,13 @@ package com.wenky.ddd.web;
 
 import com.alibaba.cola.dto.MultiResponse;
 import com.alibaba.cola.dto.Response;
+import com.alibaba.cola.dto.SingleResponse;
 import com.alibaba.fastjson.JSON;
 import com.wenky.ddd.api.CustomerServiceI;
-import com.wenky.ddd.domain.customer.gateway.CustomerGateway;
 import com.wenky.ddd.dto.CustomerAddCmd;
 import com.wenky.ddd.dto.CustomerListByNameQry;
+import com.wenky.ddd.dto.clientobject.CustomerCO;
+import com.wenky.ddd.dto.command.CustomerQry;
 import com.wenky.ddd.dto.data.CustomerDTO;
 import java.util.Enumeration;
 import javax.servlet.http.HttpServletRequest;
@@ -22,13 +24,15 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class CustomerController {
 
+    // service由client定义并由app实现
     private final CustomerServiceI customerService;
-    private final CustomerGateway customerGateway;
 
-    // curl http://127.0.0.1:8080/cname
-    @GetMapping(value = "/cname")
-    public String getName(HttpServletRequest request) {
-        return customerGateway.getName();
+    // curl http://127.0.0.1:8080/info/customer
+    @GetMapping(value = "/info/customer")
+    public SingleResponse<CustomerCO> getCustomerInfo(HttpServletRequest request) {
+        CustomerQry customerQry = new CustomerQry();
+        customerQry.setName("wenky");
+        return customerService.getCustomerInfo(customerQry);
     }
 
     // curl http://127.0.0.1:8080/helloworld

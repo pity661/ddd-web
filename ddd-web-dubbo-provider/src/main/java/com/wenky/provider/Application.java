@@ -14,6 +14,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @EnableDubbo
 @EnableDiscoveryClient
 @SpringBootApplication
+// @EnableJpaRepositories(basePackages = {"com.wenky.provider.dao.repository"})
 public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);

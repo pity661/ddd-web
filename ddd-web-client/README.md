@@ -1,0 +1,2 @@
+定义由adapter直接调用的service
+定义

@@ -4,18 +4,22 @@
 
     <springProperty scope="context" name="loggingLevel" source="app.config.log.level"/>
     <springProperty scope="context" name="loggingRoot" source="app.config.log.path"/>
+    <!-- VM options -Dapp.config.log.file=/Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider/application.log-->
+    <springProperty scope="context" name="loggingFile" source="app.config.log.file"/>
 
     <!-- [公共Appender] 控制台STDOUT -->
     <appender name="STDOUT-APPENDER" class="ch.qos.logback.core.ConsoleAppender">
         <encoder charset="UTF-8">
             <!--%d日期格式；%p输出日志的优先级；%c所属类的全名；%l输出日志发生的位置，线程，代码行数；%m程序输出的信息；%n换行 -->
-            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5p){green}%clr(-){magenta} %clr([%t]){faint} %clr(%c){cyan}%clr(:){faint}%clr(%L){faint} %clr(-){faint} %clr(%m){faint}%clr(%n){faint}</pattern>
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%-5p){green}%clr( -){magenta} %clr([%t]){faint} %clr(%c){cyan}%clr(:){faint}%clr(%L){faint} %clr(-){faint} %clr(%m){faint}%clr(%n){faint}</pattern>
         </encoder>
     </appender>
 
     <appender name="FILE"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <File>${loggingRoot}/application.log</File>
+        <!-- dubbo的日志必须指定全路径，不能配置在application.yml文件中 -->
+        <!-- <File>/Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider/application.log</File>-->
+        <File>${loggingFile}</File>
         <encoder charset="UTF-8">
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] %-17c{2}:%L - %m%n
             </pattern>
@@ -30,7 +34,12 @@
     </appender>
 
     <!--  如果匹配了这个配置，additivity::false就不会再继续往下走到root配置  -->
-    <logger name="com.wenky.ddd.provider" additivity="false"  level="INFO">
+    <logger name="com.wenky.provider" additivity="false"  level="INFO">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT-APPENDER"/>
+    </logger>
+
+    <logger name="org.apache.dubbo" additivity="false" level="DEBUG">
         <appender-ref ref="FILE"/>
         <appender-ref ref="STDOUT-APPENDER"/>
     </logger>

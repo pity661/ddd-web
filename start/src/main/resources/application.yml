@@ -18,3 +18,5 @@ dubbo:
     name: dubbo
   registry:
     address: nacos://localhost:8848
+  cloud:
+    subscribed-services: dubbo-provider

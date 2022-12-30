@@ -1,4 +1,4 @@
-package com.wenky.provider.dubbo.service;
+package com.wenky.provider.service;
 
 import com.wenky.provider.dao.entity.Customer;
 
@@ -6,11 +6,9 @@ import com.wenky.provider.dao.entity.Customer;
  * @program: ddd-web
  * @description:
  * @author: wenky
- * @create: 2022-12-29 14:01
+ * @create: 2022-12-30 09:55
  */
-public interface IHelloService {
-
-    String getName();
+public interface CustomerService {
 
     Customer getByName(String name);
 }

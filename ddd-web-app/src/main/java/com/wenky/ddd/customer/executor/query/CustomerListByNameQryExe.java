@@ -5,10 +5,13 @@ import com.wenky.ddd.dto.CustomerListByNameQry;
 import com.wenky.ddd.dto.data.CustomerDTO;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class CustomerListByNameQryExe {
+
     public MultiResponse<CustomerDTO> execute(CustomerListByNameQry cmd) {
         List<CustomerDTO> customerDTOList = new ArrayList<>();
         CustomerDTO customerDTO = new CustomerDTO();

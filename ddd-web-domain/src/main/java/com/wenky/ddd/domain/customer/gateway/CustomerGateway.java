@@ -1,9 +1,10 @@
 package com.wenky.ddd.domain.customer.gateway;
 
-import com.wenky.ddd.domain.customer.Customer;
+import com.wenky.ddd.domain.customer.CustomerDO;
 
 public interface CustomerGateway {
-    Customer getByById(String customerId);
 
     String getName();
+
+    CustomerDO getByName(String name);
 }

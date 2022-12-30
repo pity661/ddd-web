@@ -6,6 +6,34 @@ spring:
     name: dubbo-provider
   profiles:
     active: dev
+  datasource:
+    # DataSourceConfiguration#Hikari=>dataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/dubbo_provider?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=true
+    username: root
+    password: root
+    hikari:
+      pool-name: dubbo-provider-db-pool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      read-only: false
+      connection-test-query: select 1
+      data-source-properties:
+  jpa:
+    database: mysql
+    # 设置数据库方言
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    generate-ddl: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    properties:
+      temp.use_jdbc_metadata_defaults: false
 
 custom:
   name: wenky
@@ -21,7 +49,7 @@ management:
 app:
   config:
     log:
-      level: info
+      level: DEBUG
       path: /Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider
 
 dubbo:
