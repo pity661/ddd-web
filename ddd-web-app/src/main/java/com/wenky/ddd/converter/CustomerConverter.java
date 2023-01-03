@@ -1,6 +1,7 @@
 package com.wenky.ddd.converter;
 
 import com.wenky.ddd.domain.customer.CustomerDO;
+import com.wenky.ddd.domain.entity.Customer;
 import com.wenky.ddd.dto.clientobject.CustomerCO;
 import org.mapstruct.Mapper;
 
@@ -13,4 +14,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface CustomerConverter {
     CustomerCO toCO(CustomerDO customerDO);
+
+    CustomerCO toCO(Customer customer);
 }

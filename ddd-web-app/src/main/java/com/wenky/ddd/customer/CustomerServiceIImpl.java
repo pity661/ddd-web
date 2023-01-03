@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 @Service
 @CatchAndLog
 @RequiredArgsConstructor
-public class CustomerServiceImpl implements CustomerServiceI {
+public class CustomerServiceIImpl implements CustomerServiceI {
 
     // 负责获取输入，组装上下文，参数校验，调用领域层做业务处理
     private final CustomerQryExe customerQryExe;
@@ -39,5 +39,10 @@ public class CustomerServiceImpl implements CustomerServiceI {
     @Override
     public SingleResponse<CustomerCO> getCustomerInfo(CustomerQry qry) {
         return customerQryExe.execute(qry);
+    }
+
+    @Override
+    public SingleResponse<CustomerCO> getDBCustomerInfo(CustomerQry qry) {
+        return customerQryExe.executeDB(qry);
     }
 }

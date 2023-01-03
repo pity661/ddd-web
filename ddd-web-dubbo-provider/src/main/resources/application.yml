@@ -49,12 +49,14 @@ management:
 app:
   config:
     log:
-      level: DEBUG
+      level: INFO
       path: /Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider
 
 dubbo:
   application:
     name: dubbo-provider
+  config-center:
+    namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
     logger: slf4j
   protocol:
     port: 20880

@@ -18,21 +18,29 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
-@RestController
-@Validated
 @Slf4j
+@Validated
+@RestController
+@RequiredArgsConstructor
 public class CustomerController {
 
     // service由client定义并由app实现
     private final CustomerServiceI customerService;
 
-    // curl http://127.0.0.1:8080/info/customer
-    @GetMapping(value = "/info/customer")
-    public SingleResponse<CustomerCO> getCustomerInfo(HttpServletRequest request) {
+    // curl http://127.0.0.1:8080/info/wenky
+    @GetMapping(value = "/info/wenky")
+    public SingleResponse<CustomerCO> getWenky(HttpServletRequest request) {
         CustomerQry customerQry = new CustomerQry();
         customerQry.setName("wenky");
         return customerService.getCustomerInfo(customerQry);
+    }
+
+    // curl http://127.0.0.1:8080/info/wendy
+    @GetMapping(value = "/info/wendy")
+    public SingleResponse<CustomerCO> getWendy(HttpServletRequest request) {
+        CustomerQry customerQry = new CustomerQry();
+        customerQry.setName("wendy");
+        return customerService.getDBCustomerInfo(customerQry);
     }
 
     // curl http://127.0.0.1:8080/helloworld

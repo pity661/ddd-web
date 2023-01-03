@@ -17,4 +17,6 @@ public interface CustomerServiceI {
     MultiResponse<CustomerDTO> listByName(CustomerListByNameQry customerListByNameQry);
 
     SingleResponse<CustomerCO> getCustomerInfo(CustomerQry qry);
+
+    SingleResponse<CustomerCO> getDBCustomerInfo(CustomerQry customerQry);
 }

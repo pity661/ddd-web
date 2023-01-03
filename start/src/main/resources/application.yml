@@ -4,15 +4,27 @@ server:
 spring:
   application:
     name: dubbo-consumer
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/test
-#    username: root
-#    password: root
+  datasource:
+    # DataSourceConfiguration#Hikari=>dataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3307/ddd_web?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=true
+    username: root
+    password: root
+    hikari:
+      pool-name: dubbo-consumer-db-pool
+      maximum-pool-size: 10
+      minimum-idle: 2
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      read-only: false
+      connection-test-query: select 1
+      data-source-properties:
 
 dubbo:
   application:
     name: dubbo-consumer
+  config-center:
+    namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
   protocol:
     port: 21880
     name: dubbo
@@ -20,3 +32,5 @@ dubbo:
     address: nacos://localhost:8848
   cloud:
     subscribed-services: dubbo-provider
+#  consumer:
+#    check: false

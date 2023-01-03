@@ -1,5 +1,6 @@
 package com.wenky.ddd;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author Frank Zhang
  */
+@MapperScan("com.wenky.ddd.domain.mapper")
 @SpringBootApplication(scanBasePackages = {"com.wenky.ddd", "com.alibaba.cola"})
 public class Application {
 
