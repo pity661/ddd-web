@@ -32,5 +32,5 @@ dubbo:
     address: nacos://localhost:8848
   cloud:
     subscribed-services: dubbo-provider
-#  consumer:
-#    check: false
+  consumer:
+    check: false
