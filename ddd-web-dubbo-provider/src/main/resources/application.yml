@@ -61,7 +61,17 @@ dubbo:
   protocol:
     port: 20880
     name: dubbo
+    serialization: jackson
   registry:
     address: nacos://localhost:8848
   scan:
     base-packages: com.wenky.ddd.provider.dubbo.service.impl
+  provider:
+    # 在provider端配置consumer端属性，会被consumer配置覆盖
+    timeout:  #方法调用超时
+    retries:  #失败重试次数，default 2(不包含第一次)
+    loadbalance:  #负载均衡算法 random
+    actives:  #消费者端，最大并发调用限制
+
+    # 集群容错 failover, failfast, failsafe, failback, forking
+    cluster:

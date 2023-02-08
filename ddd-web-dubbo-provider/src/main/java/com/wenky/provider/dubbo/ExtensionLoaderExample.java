@@ -1,6 +1,8 @@
 package com.wenky.provider.dubbo;
 
+import com.wenky.commons.dubbo.spi.JacksonSerialization;
 import org.apache.dubbo.common.extension.ExtensionLoader;
+import org.apache.dubbo.common.serialize.Serialization;
 import org.apache.dubbo.rpc.Protocol;
 
 /**
@@ -14,7 +16,16 @@ public class ExtensionLoaderExample {
         //
         Protocol protocol =
                 ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
+        Protocol protocol1 =
+                ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("injvm");
+
+        JacksonSerialization jacksonSerialization = new JacksonSerialization();
+
+        Serialization serialization =
+                ExtensionLoader.getExtensionLoader(Serialization.class).getExtension("jackson");
 
         System.out.println(protocol.getDefaultPort());
+        System.out.println(protocol1.getDefaultPort());
+        System.out.println(serialization.getContentType());
     }
 }

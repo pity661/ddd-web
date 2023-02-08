@@ -25,12 +25,16 @@ dubbo:
     name: dubbo-consumer
   config-center:
     namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
+#    group:
   protocol:
     port: 21880
     name: dubbo
+    serialization: jackson
   registry:
     address: nacos://localhost:8848
   cloud:
     subscribed-services: dubbo-provider
   consumer:
     check: false
+    # 消费者请求超时时间
+    timeout: 5000

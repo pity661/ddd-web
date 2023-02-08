@@ -15,6 +15,10 @@
     <name>ddd-web-dubbo-provider</name>
 
     <dependencies>
+        <dependency>
+            <groupId>com.wenky.cola.ddd.web</groupId>
+            <artifactId>ddd-web-commons</artifactId>
+        </dependency>
         <!--jpa mysql modules-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

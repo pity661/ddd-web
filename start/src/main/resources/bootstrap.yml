@@ -18,3 +18,14 @@ spring:
         server-addr: 127.0.0.1:8848
         namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
         group: ddd-web
+
+# 1、日志的配置需要配置在bootstrap中，否则不会被logback-spring.xml识别
+# 2、修改xml配置文件名为logback-delayed.xml，同时在yml配置文件中添加
+# logging:
+#   config: classpath:logback-delayed.xml
+app:
+  config:
+    log:
+      level: INFO
+      path: /Users/huwenqi/Documents/wenky/java/ddd-web/start
+      file: /Users/huwenqi/Documents/wenky/java/ddd-web/start/application.log

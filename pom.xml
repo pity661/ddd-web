@@ -38,6 +38,7 @@
         <module>ddd-web-infrastructure</module>
         <module>start</module>
         <module>ddd-web-dubbo-provider</module>
+        <module>ddd-web-commons</module>
     </modules>
 
     <dependencies>
@@ -144,6 +145,11 @@
             <dependency>
                 <groupId>com.wenky.cola.ddd.web</groupId>
                 <artifactId>ddd-web-dubbo-provider</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.wenky.cola.ddd.web</groupId>
+                <artifactId>ddd-web-commons</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--Project modules End-->
