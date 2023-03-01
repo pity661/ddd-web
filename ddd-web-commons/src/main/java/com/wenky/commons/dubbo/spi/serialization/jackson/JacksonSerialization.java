@@ -1,4 +1,4 @@
-package com.wenky.commons.dubbo.spi;
+package com.wenky.commons.dubbo.spi.serialization.jackson;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

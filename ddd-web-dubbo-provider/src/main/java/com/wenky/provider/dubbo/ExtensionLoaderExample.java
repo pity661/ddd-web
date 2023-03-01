@@ -1,6 +1,6 @@
 package com.wenky.provider.dubbo;
 
-import com.wenky.commons.dubbo.spi.JacksonSerialization;
+import com.wenky.commons.dubbo.spi.serialization.jackson.JacksonSerialization;
 import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.apache.dubbo.common.serialize.Serialization;
 import org.apache.dubbo.rpc.Protocol;

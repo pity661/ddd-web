@@ -1,0 +1,2 @@
+redis=com.wenky.commons.dubbo.cache.redis.RedisCacheFactory
+caffeine=com.wenky.commons.dubbo.cache.caffeine.CaffeineCacheFactory

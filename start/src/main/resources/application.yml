@@ -38,3 +38,5 @@ dubbo:
     check: false
     # 消费者请求超时时间
     timeout: 5000
+    # CacheFilter
+#    cache: redis

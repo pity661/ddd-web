@@ -22,4 +22,9 @@ public class CustomerServiceImpl implements CustomerService {
     public Customer getByName(String name) {
         return customerRepository.findByName(name);
     }
+
+    @Override
+    public void update(Customer customer) {
+        customerRepository.save(customer);
+    }
 }

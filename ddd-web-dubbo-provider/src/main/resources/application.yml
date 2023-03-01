@@ -62,6 +62,12 @@ dubbo:
     port: 20880
     name: dubbo
     serialization: jackson
+# all(请求，响应，连接事件，断开事件，心跳) direct(所有IO线程执行) message(请求响应) execution(请求) connection
+#    dispatcher:
+# fixed(固定大小) cached(空闲一分钟删除) limited(可伸缩) eager
+#    threadpool:
+# 线程大小
+#    threads:
   registry:
     address: nacos://localhost:8848
   scan:
@@ -73,5 +79,5 @@ dubbo:
     loadbalance:  #负载均衡算法 random
     actives:  #消费者端，最大并发调用限制
 
-    # 集群容错 failover, failfast, failsafe, failback, forking
+    # 集群容错 failover, failfast, failsafe, failback, forking，broadcast
     cluster:

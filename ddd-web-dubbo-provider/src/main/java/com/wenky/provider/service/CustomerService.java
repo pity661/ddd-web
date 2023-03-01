@@ -11,4 +11,6 @@ import com.wenky.provider.dao.entity.Customer;
 public interface CustomerService {
 
     Customer getByName(String name);
+
+    void update(Customer customer);
 }

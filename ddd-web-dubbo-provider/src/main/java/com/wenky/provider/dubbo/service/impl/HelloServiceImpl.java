@@ -32,4 +32,9 @@ public class HelloServiceImpl implements IHelloService {
         String index = RpcContext.getContext().getAttachment("index"); // 传递隐式参数
         return customerService.getByName(name);
     }
+
+    @Override
+    public void update(Customer customer) {
+        customerService.update(customer);
+    }
 }

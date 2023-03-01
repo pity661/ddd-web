@@ -17,6 +17,10 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
         <!-- java.time.LocalDateTime start -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>

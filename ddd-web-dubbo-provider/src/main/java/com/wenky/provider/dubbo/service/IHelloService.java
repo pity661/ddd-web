@@ -16,6 +16,8 @@ public interface IHelloService {
 
     Customer getByName(String name);
 
+    void update(Customer customer);
+
     default CompletableFuture<Customer> getByNameAsync(String name) {
         return CompletableFuture.supplyAsync(
                 () -> {

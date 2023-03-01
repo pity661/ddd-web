@@ -6,11 +6,11 @@ import com.wenky.ddd.domain.customer.gateway.CustomerGateway;
 import com.wenky.provider.dao.entity.Customer;
 import com.wenky.provider.dubbo.service.IHelloService;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.rpc.RpcContext;
 import org.springframework.stereotype.Component;
 
@@ -24,16 +24,20 @@ public class CustomerGatewayImpl implements CustomerGateway {
     // ReferenceBeanBuilder#configureMethodConfig
     // onreturn不会生效
     @DubboReference(
-            // failover, failfast, failsafe, failback, forking
+            // 请求结果缓存
+            // cache = "caffeine",
+            // cache = "redis",
+            // 容错策略
             cluster = "",
             timeout = 2 * 1000, // 指定timeout覆盖配置文件全局consumer配置
             version = "1.0",
-            group = "custom1"
-            //            , methods = {
-            //                @Method(name = "getByName", async = true, onreturn =
-            // "customerGatewayImpl.onreturn")
-            //            }
-            )
+            group = "custom1",
+            methods = {
+                // @Method(name = "getByName", async = true, onreturn =
+                // "customerGatewayImpl.onreturn")
+                // 针对单个接口设置缓存
+                @Method(name = "getByName", cache = "caffeine")
+            })
     private IHelloService iHelloService;
 
     private final ConsumerConverter consumerConverter;
@@ -53,16 +57,31 @@ public class CustomerGatewayImpl implements CustomerGateway {
     @Override
     public CustomerDO getByName(String name) {
         // 传递隐式参数
-        RpcContext.getContext().setAttachment("index", "1");
+        //        RpcContext.getContext().setAttachment("index", "1");
 
         // 异步调用 同步返回结果
-        com.wenky.provider.dao.entity.Customer customer = getByMethodAnnotation(name);
+        //        com.wenky.provider.dao.entity.Customer customer = getByMethodAnnotation(name);
 
         // 异步调用 异步返回结果，但是会因为响应超时报错，通过修改DubboReference::timeout属性解决超时
-        //                com.wenky.provider.dao.entity.Customer customer = getByAsyncFuture(name);
+        //                        com.wenky.provider.dao.entity.Customer customer =
+        // getByAsyncFuture(name);
 
         // 同步调用 同步返回结果
-        //        com.wenky.provider.dao.entity.Customer customer = iHelloService.getByName(name);
+        com.wenky.provider.dao.entity.Customer customer = iHelloService.getByName(name);
+
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // start
+        // DubboReference::Method给指定方法设置缓存，缓存结果为ValueWrapper包装类，所以结果为null也会缓存
+        customer.setAge(15);
+        iHelloService.update(customer);
+        com.wenky.provider.dao.entity.Customer customer1 = iHelloService.getByName(name);
+        com.wenky.provider.dao.entity.Customer customer2 = iHelloService.getByName(name);
+        // end
 
         return consumerConverter.toDO(customer);
     }
@@ -71,24 +90,17 @@ public class CustomerGatewayImpl implements CustomerGateway {
         CompletableFuture<com.wenky.provider.dao.entity.Customer> future =
                 iHelloService.getByNameAsync(name);
 
-        future.whenComplete(
-                (c, t) -> {
-                    if (t != null) {
-                        log.error("", t);
-                        return;
-                    }
-                    log.info(String.format("customer: %s", c.toString()));
-                });
+        future =
+                future.whenComplete(
+                        (c, t) -> {
+                            if (t != null) {
+                                log.error("", t);
+                                return;
+                            }
+                            log.info(String.format("customer: %s", c.toString()));
+                        });
 
-        try {
-            return future.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return future.join();
     }
 
     // 通过DubboReference::method注解指定方法异步执行实现异步调用
@@ -96,11 +108,12 @@ public class CustomerGatewayImpl implements CustomerGateway {
         com.wenky.provider.dao.entity.Customer customer = iHelloService.getByName(name);
         // 不能多次异步调用，RpcContext只会保留最后一次调用的future
         // 调用后可以立刻取出当前future对象
-        Future<com.wenky.provider.dao.entity.Customer> future = RpcContext.getContext().getFuture();
+        CompletableFuture<com.wenky.provider.dao.entity.Customer> future =
+                RpcContext.getContext().getCompletableFuture();
 
         com.wenky.provider.dao.entity.Customer customer1 = iHelloService.getByName(name + "1");
-        Future<com.wenky.provider.dao.entity.Customer> future1 =
-                RpcContext.getContext().getFuture();
+        CompletableFuture<com.wenky.provider.dao.entity.Customer> future1 =
+                RpcContext.getContext().getCompletableFuture();
 
         // 异步调用不会直接返回结果，需要在RpcContext中延迟获取
         if (customer == null) {
@@ -109,14 +122,8 @@ public class CustomerGatewayImpl implements CustomerGateway {
             // name));
         }
 
-        try {
-            customer = future.get();
-            customer1 = future1.get();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
+        customer = future.join();
+        customer1 = future1.join();
 
         if (customer1 == null) {
             log.info(String.format("name: %s, customer not exists!", name + "1"));

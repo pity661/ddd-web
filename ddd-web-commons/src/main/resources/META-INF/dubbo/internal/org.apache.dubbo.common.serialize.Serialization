@@ -1,1 +1,1 @@
-jackson=com.wenky.commons.dubbo.spi.JacksonSerialization
+jackson=com.wenky.commons.dubbo.spi.serialization.jackson.JacksonSerialization
