@@ -31,7 +31,9 @@ dubbo:
     name: dubbo
     serialization: jackson
   registry:
-    address: nacos://localhost:8848
+#    address: nacos://localhost:8848
+    # 不使用注册中心直接在service上指定url，导致无token调用provider失效
+    address: N/A
   cloud:
     subscribed-services: dubbo-provider
   consumer:

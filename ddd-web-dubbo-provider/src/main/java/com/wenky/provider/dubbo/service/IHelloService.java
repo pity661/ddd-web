@@ -1,6 +1,8 @@
 package com.wenky.provider.dubbo.service;
 
+import com.wenky.commons.dubbo.model.DubboInvokeResult;
 import com.wenky.provider.dao.entity.Customer;
+import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +18,15 @@ public interface IHelloService {
 
     Customer getByName(String name);
 
+    DubboInvokeResult getWrapperByName(String name);
+
     void update(Customer customer);
+
+    DubboInvokeResult IOError() throws IOException;
+
+    DubboInvokeResult RuntimeError() throws IOException;
+
+    Integer timeout() throws InterruptedException;
 
     default CompletableFuture<Customer> getByNameAsync(String name) {
         return CompletableFuture.supplyAsync(

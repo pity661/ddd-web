@@ -37,4 +37,8 @@ public class CustomerQryExe {
         Customer customer = customerService.getByName(qry.getName());
         return SingleResponse.of(customerConverter.toCO(customer));
     }
+
+    public void error() {
+        customerGateway.error();
+    }
 }

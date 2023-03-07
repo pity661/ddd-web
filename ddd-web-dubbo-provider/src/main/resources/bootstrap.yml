@@ -19,3 +19,10 @@ spring:
         server-addr: 127.0.0.1:8848
         namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
         group: ddd-web
+
+app:
+  config:
+    log:
+      level: INFO
+      path: /Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider
+      file: ${app.config.log.path}/application.log

@@ -28,4 +28,4 @@ app:
     log:
       level: INFO
       path: /Users/huwenqi/Documents/wenky/java/ddd-web/start
-      file: /Users/huwenqi/Documents/wenky/java/ddd-web/start/application.log
+      file: ${app.config.log.path}/application.log

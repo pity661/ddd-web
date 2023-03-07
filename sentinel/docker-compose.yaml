@@ -1,0 +1,13 @@
+version: '3'
+services:
+  sentinel-dashboard:
+    # https://github.com/nacos-group/nacos-docker
+    image: bladex/sentinel-dashboard:latest
+    container_name: sentinel-dashboard
+    environment:
+      JAVA_OPTS: "-Dserver.port=8858 -Dcsp.sentinel.dashboard.server=localhost:8858 -Dproject.name=sentinel-dashboard"
+    ports:
+      - "8858:8858"
+    restart: always
+    volumes:
+      - ./root/logs:/root/logs

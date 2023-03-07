@@ -27,6 +27,13 @@ public class CustomerController {
     // service由client定义并由app实现
     private final CustomerServiceI customerService;
 
+    // curl http://127.0.0.1:8080/info/error
+    @GetMapping(value = "/info/error")
+    public Response error(HttpServletRequest request) {
+        customerService.error();
+        return Response.buildSuccess();
+    }
+
     // curl http://127.0.0.1:8080/info/wenky
     @GetMapping(value = "/info/wenky")
     public SingleResponse<CustomerCO> getWenky(HttpServletRequest request) {

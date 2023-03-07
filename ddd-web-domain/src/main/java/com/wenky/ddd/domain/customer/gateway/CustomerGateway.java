@@ -7,4 +7,6 @@ public interface CustomerGateway {
     String getName();
 
     CustomerDO getByName(String name);
+
+    void error();
 }

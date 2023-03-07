@@ -46,12 +46,6 @@ management:
       exposure:
         include: '*'
 
-app:
-  config:
-    log:
-      level: INFO
-      path: /Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider
-
 dubbo:
   application:
     name: dubbo-provider
@@ -72,12 +66,22 @@ dubbo:
     address: nacos://localhost:8848
   scan:
     base-packages: com.wenky.ddd.provider.dubbo.service.impl
+  # 配置针对provider所有service生效
   provider:
     # 在provider端配置consumer端属性，会被consumer配置覆盖
     timeout:  #方法调用超时
     retries:  #失败重试次数，default 2(不包含第一次)
     loadbalance:  #负载均衡算法 random
     actives:  #消费者端，最大并发调用限制
-
     # 集群容错 failover, failfast, failsafe, failback, forking，broadcast
     cluster:
+    # 限流配置
+    executes:
+    # 值为true，随机生成token。也可以指定token值。防止consumer绕过注册中心直接调用provider
+    token: true
+    # 使用自定义ExceptionConvertFilter，禁用默认ExceptionFilter
+    # provider排除sentinel的consumer过滤器
+    filter: -exception,-sentinel.dubbo.consumer.filter
+    # 配置最大数据包最大载荷
+    payload:
+

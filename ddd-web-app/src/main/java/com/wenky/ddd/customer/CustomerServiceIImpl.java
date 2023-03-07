@@ -45,4 +45,9 @@ public class CustomerServiceIImpl implements CustomerServiceI {
     public SingleResponse<CustomerCO> getDBCustomerInfo(CustomerQry qry) {
         return customerQryExe.executeDB(qry);
     }
+
+    @Override
+    public void error() {
+        customerQryExe.error();
+    }
 }

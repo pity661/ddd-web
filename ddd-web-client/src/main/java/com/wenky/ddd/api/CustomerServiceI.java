@@ -19,4 +19,6 @@ public interface CustomerServiceI {
     SingleResponse<CustomerCO> getCustomerInfo(CustomerQry qry);
 
     SingleResponse<CustomerCO> getDBCustomerInfo(CustomerQry customerQry);
+
+    void error();
 }
