@@ -25,20 +25,29 @@ dubbo:
     name: dubbo-consumer
   config-center:
     namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
+    logger: slf4j
 #    group:
   protocol:
     port: 21880
     name: dubbo
-    serialization: jackson
+    transporter: iNetty
+    # 这两个配置server、client需要成对出现
+    server: iNetty
+    client: iNetty
+    # 不能反序列化异常对象类型
+  #    serialization: jackson
   registry:
-#    address: nacos://localhost:8848
+    address: nacos://localhost:8848
     # 不使用注册中心直接在service上指定url，导致无token调用provider失效
-    address: N/A
+#    address: N/A
   cloud:
     subscribed-services: dubbo-provider
   consumer:
     check: false
     # 消费者请求超时时间
     timeout: 5000
+    # consumer将sentinel provider filter排除。(@Activate注解默认不会生效，不排除也行)
+    filter: -sentinel.dubbo.provider.filter #--sentinel.dubbo.consumer.filter # 禁用sentinel功能
     # CacheFilter
+#  provider:
 #    cache: redis

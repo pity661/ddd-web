@@ -4,6 +4,7 @@ import com.wenky.commons.dubbo.model.DubboInvokeResult;
 import com.wenky.provider.dubbo.service.IHelloService;
 import java.io.IOException;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.rpc.RpcException;
 
 /**
  * @program: ddd-web
@@ -27,20 +28,29 @@ public class MockWrapper extends AbstractIHelloService {
 
     // MockClusterInvoker#invoke
     @Override
-    public DubboInvokeResult IOError() throws IOException {
-        return iHelloService.IOError();
+    public DubboInvokeResult BizError() {
+        return iHelloService.BizError();
     }
 
     @DubboReference(
             // 请求失败返回自定义结果
-            mock = "return {\"code\": 1000, \"message\": \"请求失败，mock结果\"}",
+            mock = "return {\"code\": 1001, \"message\": \"请求失败，mock结果\"}",
             version = "1.0",
             group = "custom1")
     private IHelloService iHelloService1;
 
     // MockInvoker#invoke -> 118#normalizeMock
-    public DubboInvokeResult mock() throws IOException {
-        return iHelloService1.IOError();
+    public DubboInvokeResult customMock() {
+        return iHelloService1.BizError();
+    }
+
+    public DubboInvokeResult customIOError() {
+        try {
+            return iHelloService1.IOError();
+        } catch (IOException | RpcException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @DubboReference(
@@ -50,8 +60,8 @@ public class MockWrapper extends AbstractIHelloService {
             group = "custom1")
     private IHelloService iHelloService2;
 
-    public DubboInvokeResult mockTarget() throws IOException {
-        return iHelloService2.IOError();
+    public DubboInvokeResult mockTarget() {
+        return iHelloService2.BizError();
     }
 
     @DubboReference(
@@ -63,19 +73,19 @@ public class MockWrapper extends AbstractIHelloService {
 
     // MockClusterInvoker#invoke -> 89
     // 直接调用mock方法，不会发起远程调用
-    public DubboInvokeResult mockForce() throws IOException {
-        return iHelloService3.IOError();
+    public DubboInvokeResult mockForce() {
+        return iHelloService3.BizError();
     }
 
     @DubboReference(
             // 请求失败返回自定义结果
-            mock = "fail:return {\"code\": 3000, \"message\": \"请求失败，fail mock结果\"}",
+            mock = "fail:return {\"code\": 3001, \"message\": \"请求失败，fail mock结果\"}",
             version = "1.0",
             group = "custom1")
     private IHelloService iHelloService4;
 
-    public DubboInvokeResult mockFail() throws IOException {
-        return iHelloService4.IOError();
+    public DubboInvokeResult mockFail() {
+        return iHelloService4.BizError();
     }
 
     @DubboReference(
@@ -86,7 +96,7 @@ public class MockWrapper extends AbstractIHelloService {
             cache = "caffeine")
     private IHelloService iHelloService5;
 
-    public DubboInvokeResult mockDefault() throws IOException {
-        return iHelloService5.IOError();
+    public DubboInvokeResult mockDefault() {
+        return iHelloService5.BizError();
     }
 }

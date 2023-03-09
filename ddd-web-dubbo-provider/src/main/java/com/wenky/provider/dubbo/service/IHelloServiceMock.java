@@ -34,12 +34,17 @@ public class IHelloServiceMock implements IHelloService {
 
     @Override
     public DubboInvokeResult IOError() throws IOException {
-        return DubboInvokeResult.builder().code(4000).message("mock service").build();
+        throw new UnsupportedOperationException();
     }
 
     @Override
-    public DubboInvokeResult RuntimeError() throws IOException {
+    public DubboInvokeResult RuntimeError() {
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public DubboInvokeResult BizError() {
+        return DubboInvokeResult.exception(new IOException(""));
     }
 
     @Override

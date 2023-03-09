@@ -1,6 +1,5 @@
 package com.wenky.ddd.customer.dubbo;
 
-import com.alibaba.fastjson.JSON;
 import com.wenky.commons.dubbo.model.DubboInvokeResult;
 import com.wenky.commons.dubbo.model.HandleResultEnum;
 import com.wenky.ddd.ITest;
@@ -24,13 +23,14 @@ public class ExceptionWrapperTest extends ITest {
 
     @Test
     public void test() throws IOException {
-        DubboInvokeResult result = exceptionWrapper.IOError();
-        Assert.assertNull(result);
+        DubboInvokeResult first = exceptionWrapper.IOError();
+        log.info("---ExceptionWrapperTest---, first:{}", first);
+        Assert.assertNull(first);
 
-        result = exceptionWrapper.RuntimeError();
-        log.info(JSON.toJSONString(result));
+        DubboInvokeResult second = exceptionWrapper.RuntimeError();
+        log.info("---ExceptionWrapperTest---, second:{}", second);
         Assert.assertEquals(
-                Optional.ofNullable(result).map(DubboInvokeResult::getCode).orElse(null),
+                Optional.ofNullable(second).map(DubboInvokeResult::getCode).orElse(null),
                 HandleResultEnum.SYSTEM_ERROR.getCode());
     }
 }

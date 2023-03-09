@@ -3,6 +3,7 @@ package com.wenky.provider.dubbo;
 import com.wenky.commons.dubbo.spi.serialization.jackson.JacksonSerialization;
 import org.apache.dubbo.common.extension.ExtensionLoader;
 import org.apache.dubbo.common.serialize.Serialization;
+import org.apache.dubbo.remoting.Codec2;
 import org.apache.dubbo.rpc.Protocol;
 
 /**
@@ -13,7 +14,10 @@ import org.apache.dubbo.rpc.Protocol;
  */
 public class ExtensionLoaderExample {
     public static void main(String[] args) {
-        //
+
+        Codec2 codec = ExtensionLoader.getExtensionLoader(Codec2.class).getExtension("wenkyDubbo");
+        System.out.println(codec);
+
         Protocol protocol =
                 ExtensionLoader.getExtensionLoader(Protocol.class).getExtension("dubbo");
         Protocol protocol1 =

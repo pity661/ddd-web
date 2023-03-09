@@ -1,7 +1,6 @@
 package com.wenky.commons.dubbo.filter;
 
 import com.wenky.commons.dubbo.model.DubboInvokeResult;
-import com.wenky.commons.dubbo.model.HandleResultEnum;
 import java.lang.reflect.Method;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.common.constants.CommonConstants;
@@ -21,6 +20,7 @@ import org.apache.dubbo.rpc.service.GenericService;
 @Activate(group = CommonConstants.PROVIDER)
 public class ExceptionConvertFilter implements Filter, Filter.Listener {
 
+    // ProtocolFilterWrapper#buildInvokerChain
     @Override
     public Result invoke(Invoker<?> invoker, Invocation invocation) throws RpcException {
         return invoker.invoke(invocation);
@@ -45,6 +45,7 @@ public class ExceptionConvertFilter implements Filter, Filter.Listener {
             Class<?> returnType;
 
             // 如果是受检时异常，不做处理
+            // mock处理不了这种情况，可以包装成RpcException
             // directly throw if the exception appears in the signature
             try {
                 Method method =
@@ -77,11 +78,18 @@ public class ExceptionConvertFilter implements Filter, Filter.Listener {
                             + exception.getMessage(),
                     exception);
 
+            // 判断是否存在异常逻辑重写 通过重写DecodeableRpcResult#hasException方法，实现自定义对象优雅处理异常
+            // SentinelDubboConsumerFilter#83 记录异常调用结果
+            // CacheFilter#107 非异常结果进行缓存
+            // 对Cluster的影响
             // 如果方法返回类型为DubboInvokeResult，转化为指定结果
             if (DubboInvokeResult.class == returnType) {
-                appResponse.setException(null);
-                appResponse.setValue(
-                        DubboInvokeResult.newInstance(HandleResultEnum.SYSTEM_ERROR, exception));
+                // 原逻辑：DubboCodec#encodeResponseData 192,当exception存在时，仅执行writeThrowable
+                // 重写逻辑：IDubboCodec#encodeResponseData 156,存在异常时，服务端可以正常响应value信息至客户端
+                appResponse.setException(exception);
+                DubboInvokeResult result = DubboInvokeResult.exception(exception);
+                result.wrapperRpcException();
+                appResponse.setValue(result);
                 return;
             }
 

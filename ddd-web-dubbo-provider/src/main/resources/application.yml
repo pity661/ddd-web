@@ -55,7 +55,11 @@ dubbo:
   protocol:
     port: 20880
     name: dubbo
-    serialization: jackson
+    transporter: iNetty
+    # 这两个配置server、client需要成对出现
+    server: iNetty
+    client: iNetty
+  #    serialization: jackson
 # all(请求，响应，连接事件，断开事件，心跳) direct(所有IO线程执行) message(请求响应) execution(请求) connection
 #    dispatcher:
 # fixed(固定大小) cached(空闲一分钟删除) limited(可伸缩) eager
@@ -81,7 +85,7 @@ dubbo:
     token: true
     # 使用自定义ExceptionConvertFilter，禁用默认ExceptionFilter
     # provider排除sentinel的consumer过滤器
-    filter: -exception,-sentinel.dubbo.consumer.filter
+    filter: -exception,-sentinel.dubbo.consumer.filter #--sentinel.dubbo.provider.filter # 禁用sentinel功能
     # 配置最大数据包最大载荷
     payload:
 

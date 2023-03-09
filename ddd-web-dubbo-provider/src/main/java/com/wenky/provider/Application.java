@@ -17,6 +17,14 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 // 指定basePackages
 // @EnableJpaRepositories(basePackages = {"com.wenky.provider.dao.repository"})
 public class Application {
+    // 8081
+    // VM options:
+    // -Dapp.config.log.file=/Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider/application.log -Dproject.name=dubbo-provider -Dcsp.sentinel.dashboard.server=127.0.0.1:8858
+
+    // 8082
+    // VM options:
+    // -Dapp.config.log.file=/Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider/application-8082.log -Dproject.name=dubbo-provider -Dcsp.sentinel.dashboard.server=127.0.0.1:8858
+    // environment variables: dubbo.protocol.port=20881;server.port=8082
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }

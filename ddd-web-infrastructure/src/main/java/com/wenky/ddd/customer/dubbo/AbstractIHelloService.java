@@ -39,7 +39,12 @@ public abstract class AbstractIHelloService implements IHelloService {
     }
 
     @Override
-    public DubboInvokeResult RuntimeError() throws IOException {
+    public DubboInvokeResult RuntimeError() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public DubboInvokeResult BizError() {
         throw new UnsupportedOperationException();
     }
 

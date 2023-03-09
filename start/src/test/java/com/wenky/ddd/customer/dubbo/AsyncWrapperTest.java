@@ -23,13 +23,15 @@ public class AsyncWrapperTest extends ITest {
         customer = future.join();
         Assert.assertNotNull(customer);
 
-        // 多次调用返回对象不同，但是序列化结果一直
+        // 多次调用返回对象不同，但是序列化结果一致
         Customer customer1 = asyncWrapper.getByName("wenky");
         Assert.assertNull(customer1);
         future = RpcContext.getContext().getCompletableFuture();
         customer1 = future.join();
-
         Assert.assertFalse(customer == customer1);
         Assert.assertEquals(customer, customer1);
+
+        Customer customer2 = asyncWrapper.getByAsyncFuture("wenky");
+        Assert.assertNotNull(customer2);
     }
 }

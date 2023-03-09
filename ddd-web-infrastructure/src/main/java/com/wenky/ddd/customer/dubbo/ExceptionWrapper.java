@@ -32,10 +32,10 @@ public class ExceptionWrapper extends AbstractIHelloService {
     }
 
     @Override
-    public DubboInvokeResult RuntimeError() throws IOException {
+    public DubboInvokeResult RuntimeError() {
         try {
             return iHelloService.RuntimeError();
-        } catch (RpcException | IOException e) {
+        } catch (RpcException e) {
             log.error("invoke error", e);
         }
         return null;

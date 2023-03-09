@@ -53,7 +53,7 @@ public class HelloServiceImpl implements IHelloService {
 
     @Override
     public DubboInvokeResult getWrapperByName(String name) {
-        return DubboInvokeResult.newInstance(getByName(name));
+        return DubboInvokeResult.success(getByName(name));
     }
 
     @Override
@@ -67,8 +67,13 @@ public class HelloServiceImpl implements IHelloService {
     }
 
     @Override
-    public DubboInvokeResult RuntimeError() throws IOException {
+    public DubboInvokeResult RuntimeError() {
         throw new RuntimeException("dubbo provider throw RuntimeException");
+    }
+
+    @Override
+    public DubboInvokeResult BizError() {
+        throw new RuntimeException("dubbo provider throw BizException");
     }
 
     @Override

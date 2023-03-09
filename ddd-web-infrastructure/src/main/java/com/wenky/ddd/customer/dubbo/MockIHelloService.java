@@ -14,7 +14,8 @@ public class MockIHelloService extends AbstractIHelloService {
 
     // mock类需要实现目标调用接口
     // mock方法签名需要与调用方法签名一致
-    public DubboInvokeResult IOError() throws IOException {
-        return DubboInvokeResult.builder().code(2000).message("mock service").build();
+    @Override
+    public DubboInvokeResult BizError() {
+        return DubboInvokeResult.exception(new IOException("mock service"));
     }
 }

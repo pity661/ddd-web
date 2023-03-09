@@ -42,7 +42,7 @@ public class AsyncWrapper extends AbstractIHelloService {
         return iHelloService.getByName(name);
     }
 
-    private Customer getByAsyncFuture(String name) {
+    public Customer getByAsyncFuture(String name) {
         CompletableFuture<Customer> future = iHelloService.getByNameAsync(name);
         future =
                 future.whenComplete(

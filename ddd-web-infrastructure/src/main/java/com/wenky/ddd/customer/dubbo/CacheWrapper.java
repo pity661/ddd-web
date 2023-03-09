@@ -1,5 +1,6 @@
 package com.wenky.ddd.customer.dubbo;
 
+import com.wenky.commons.dubbo.model.DubboInvokeResult;
 import com.wenky.provider.dao.entity.Customer;
 import com.wenky.provider.dubbo.service.IHelloService;
 import org.apache.dubbo.config.annotation.DubboReference;
@@ -19,14 +20,21 @@ public class CacheWrapper extends AbstractIHelloService {
             group = "custom1",
             methods = {
                 // 针对单个接口设置缓存
-                @Method(name = "getByName", cache = "caffeine")
+                @Method(name = "getByName", cache = "caffeine"),
+                @Method(name = "RuntimeError", cache = "caffeine")
             })
     private IHelloService iHelloService;
 
-    // CacheFilter#hasException返回false就缓存结果，所以自定义异常处理之后需要重写这段逻辑
+    // CacheFilter#invoke -> 107hasException返回false就缓存结果，所以自定义异常处理之后需要重写这段逻辑
     @Override
     // DubboReference::Method给指定方法设置缓存，缓存结果为ValueWrapper包装类，所以结果为null也会缓存
     public Customer getByName(String name) {
         return iHelloService.getByName(name);
+    }
+
+    @Override
+    public DubboInvokeResult RuntimeError() {
+
+        return iHelloService.RuntimeError();
     }
 }

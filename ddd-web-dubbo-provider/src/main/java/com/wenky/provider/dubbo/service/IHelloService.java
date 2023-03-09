@@ -24,7 +24,9 @@ public interface IHelloService {
 
     DubboInvokeResult IOError() throws IOException;
 
-    DubboInvokeResult RuntimeError() throws IOException;
+    DubboInvokeResult RuntimeError();
+
+    DubboInvokeResult BizError();
 
     Integer timeout() throws InterruptedException;
 
