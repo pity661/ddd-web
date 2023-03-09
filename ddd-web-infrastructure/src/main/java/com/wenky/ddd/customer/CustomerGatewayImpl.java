@@ -34,8 +34,8 @@ public class CustomerGatewayImpl implements CustomerGateway {
     public CustomerDO getByName(String name) {
         // 传递隐式参数
         RpcContext.getContext().setAttachment("index", "1");
-
         Customer customer = iHelloService.getByName(name);
+        log.info(customer.toString());
         return consumerConverter.toDO(customer);
     }
 

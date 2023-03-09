@@ -48,7 +48,9 @@ public class HelloServiceImpl implements IHelloService {
     public Customer getByName(String name) {
         String index = RpcContext.getContext().getAttachment("index"); // 传递隐式参数
         log.info("attachment, index:{}", index);
-        return customerService.getByName(name);
+        Customer customer = customerService.getByName(name);
+        log.info(customer.toString());
+        return customer;
     }
 
     @Override

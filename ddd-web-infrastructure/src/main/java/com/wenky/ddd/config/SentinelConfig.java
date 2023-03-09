@@ -34,9 +34,9 @@ public class SentinelConfig {
         flowRule.setCount(1d);
         // 流控针对的调用来源。default不区分来源
         flowRule.setLimitApp("default");
-        // 调用关系限流策略
+        // 根据调用发限流
         flowRule.setStrategy(RuleConstant.STRATEGY_DIRECT);
-        // 配置链式资源限制。如果多个操作都会调用资源，只有refResource才会记录统计
+        // 根据调用链路入口限流。如果多个操作都会调用资源，只有refResource才会记录统计
         //        flowRule.setStrategy(RuleConstant.STRATEGY_CHAIN);
         //        flowRule.setRefResource("");
         // 关联流量控制。通过refResource来限制resource的操作
@@ -78,7 +78,9 @@ public class SentinelConfig {
         FlowRuleManager.loadRules(Arrays.asList(flowRule));
         // 熔断降级规则
         DegradeRuleManager.loadRules(Arrays.asList(degradeRule));
-        DubboAdapterGlobalConfig.setConsumerFallback(new DefaultDubboFallback());
+        // 限流和熔断后返回的自定义结果
+        DubboAdapterGlobalConfig.setProviderFallback(new DefaultDubboFallback()); // provider
+        DubboAdapterGlobalConfig.setConsumerFallback(new DefaultDubboFallback()); // consumer
 
         // 熔断器事件监听
         EventObserverRegistry.getInstance()

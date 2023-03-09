@@ -6,6 +6,7 @@ import java.io.IOException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.rpc.RpcException;
+import org.springframework.stereotype.Component;
 
 /**
  * @program: ddd-web
@@ -14,7 +15,7 @@ import org.apache.dubbo.rpc.RpcException;
  * @create: 2023-03-03 14:05
  */
 @Slf4j
-// @Component
+ @Component
 public class ExceptionWrapper extends AbstractIHelloService {
 
     // 异常处理 ExceptionFilter 默认在provider中使用

@@ -1,1 +1,3 @@
 exceptionConvert=com.wenky.commons.dubbo.filter.ExceptionConvertFilter
+providerTraceIdFilter=com.wenky.commons.dubbo.filter.ProviderTraceIdFilter
+consumerTraceIdFilter=com.wenky.commons.dubbo.filter.ConsumerTraceIdFilter

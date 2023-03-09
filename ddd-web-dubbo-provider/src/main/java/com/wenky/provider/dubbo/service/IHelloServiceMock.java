@@ -10,6 +10,7 @@ import java.io.IOException;
  * @author: wenky
  * @create: 2023-03-07 11:34
  */
+// 必须和IHelloService在同一个包下
 public class IHelloServiceMock implements IHelloService {
 
     @Override

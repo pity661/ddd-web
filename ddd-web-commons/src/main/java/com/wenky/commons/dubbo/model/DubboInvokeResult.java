@@ -28,6 +28,10 @@ public class DubboInvokeResult<T> implements Serializable {
 
     private Throwable exception;
 
+    public LocalDateTime getResponseTime() {
+        return responseTime == null ? LocalDateTime.now() : responseTime;
+    }
+
     public DubboInvokeResult(HandleResult handleResult) {
         this.code = handleResult.getCode();
         this.message = handleResult.getMessage();

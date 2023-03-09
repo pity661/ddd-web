@@ -7,12 +7,12 @@
     <!-- VM options -Dapp.config.log.file=/Users/huwenqi/Documents/wenky/java/ddd-web/start/application.log-->
     <springProperty scope="context" name="loggingFile" source="app.config.log.file"/>
 
-    <appender name="APPLICATION"
-        class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="APPLICATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--定义日志输出的路径-->
         <file>${loggingRoot}/application.log</file>
         <encoder>
-            <pattern>${FILE_LOG_PATTERN}</pattern>
+<!--            <pattern>${FILE_LOG_PATTERN}</pattern>-->
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss.SSS}] [%X{traceId}] [Thread: %t] [%-5level] [%logger:%line] --%mdc{clientIp} %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>${loggingRoot}/application.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
@@ -24,7 +24,8 @@
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+<!--            <pattern>${CONSOLE_LOG_PATTERN}</pattern>-->
+            <pattern>[%date{yyyy-MM-dd HH:mm:ss.SSS}] [%X{traceId}] [Thread: %t] [%-5level] [%logger:%line] --%mdc{clientIp} %msg%n</pattern>
             <charset>utf8</charset>
         </encoder>
     </appender>
