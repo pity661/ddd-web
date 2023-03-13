@@ -1,7 +1,12 @@
 server:
   port: 8081
+  # 优雅停机
+  shutdown: graceful
 
 spring:
+  lifecycle:
+    # 停机缓冲期，最大等待时间
+    timeout-per-shutdown-phase: 30s
   application:
     name: dubbo-provider
   profiles:
@@ -9,7 +14,7 @@ spring:
   datasource:
     # DataSourceConfiguration#Hikari=>dataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3307/dubbo_provider?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=true
+    url: jdbc:mysql://${SERVER_IP}:3307/dubbo_provider?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=true
     username: root
     password: root
     hikari:
@@ -67,7 +72,8 @@ dubbo:
 # 线程大小
 #    threads:
   registry:
-    address: nacos://localhost:8848
+#    address: nacos://localhost:8848
+    address: nacos://${SERVER_IP}:8848
   scan:
     base-packages: com.wenky.ddd.provider.dubbo.service.impl
   # 配置针对provider所有service生效

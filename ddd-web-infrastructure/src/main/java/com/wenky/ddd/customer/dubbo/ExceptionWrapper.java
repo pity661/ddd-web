@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @create: 2023-03-03 14:05
  */
 @Slf4j
- @Component
+@Component
 public class ExceptionWrapper extends AbstractIHelloService {
 
     // 异常处理 ExceptionFilter 默认在provider中使用

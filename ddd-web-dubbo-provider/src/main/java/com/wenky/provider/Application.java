@@ -25,6 +25,8 @@ public class Application {
     // VM options:
     // -Dapp.config.log.file=/Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider/application-8082.log -Dproject.name=dubbo-provider -Dcsp.sentinel.dashboard.server=127.0.0.1:8858
     // environment variables: dubbo.protocol.port=20881;server.port=8082
+
+    // environment variables: SERVER_IP=10.100.19.191
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
