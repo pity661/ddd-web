@@ -41,6 +41,34 @@ spring:
         implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
     properties:
       temp.use_jdbc_metadata_defaults: false
+  # rabbitmq
+  rabbitmq:
+    host: ${SERVER_IP}
+    port: 5672
+    username: root
+    password: root
+    virtual-host: ddd-web
+    # exchange
+    publisher-confirm-type: correlated
+    # queue
+    publisher-returns: true
+    listener:
+      direct:
+        # manual手动确认 none自动确认
+        acknowledge-mode: manual
+        # 消费者每次从队列拉取消息的个数
+        prefetch: 5
+#        retry:
+#          enabled: true
+#          max-attempts: 3 # 最大重试次数
+#          initial-interval: 1000 # 初始重试间隔
+#          multiplier: 1 # 每次重试后增加几倍时间
+#          max-interval: 10000 # 最大重试间隔
+      # fanout、topic、headers
+      simple:
+        acknowledge-mode: manual
+        prefetch: 5
+
 
 custom:
   name: wenky

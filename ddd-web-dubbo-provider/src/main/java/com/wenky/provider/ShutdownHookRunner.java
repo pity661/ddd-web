@@ -12,10 +12,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ShutdownHookRunner implements CommandLineRunner {
     /**
-     * 优雅停机时，JVM关闭调用的钩子
-     * kill -15 PID
+     * 优雅停机时，JVM关闭调用的钩子 kill -15 PID
      *
-     * 当执行`curl http://127.0.0.1:8081/sleep`,有线程被挂起也会执行当前hook
+     * <p>当执行`curl http://127.0.0.1:8081/sleep`,有线程被挂起也会执行当前hook
      *
      * @param args
      * @throws Exception

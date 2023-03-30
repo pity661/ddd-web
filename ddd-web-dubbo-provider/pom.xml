@@ -19,6 +19,15 @@
             <groupId>com.wenky.cola.ddd.web</groupId>
             <artifactId>ddd-web-commons</artifactId>
         </dependency>
+
+        <!--rabbitmq modules-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!--rabbitmq modules-->
+
         <!--jpa mysql modules-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
