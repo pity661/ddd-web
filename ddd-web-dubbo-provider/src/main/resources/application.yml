@@ -1,11 +1,13 @@
 server:
   port: 8081
-  # 优雅停机
+  # 优雅停机配置graceful
+  # kill -9 强制关机
+  # kill -15 等待应用主动关闭
   shutdown: graceful
 
 spring:
   lifecycle:
-    # 停机缓冲期，最大等待时间
+    # 优雅停机缓冲期，最大等待时间
     timeout-per-shutdown-phase: 30s
   application:
     name: dubbo-provider
