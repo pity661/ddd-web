@@ -4,3 +4,13 @@ server:
 spring:
   application:
     name: ddd-web-gateway
+  cloud:
+    gateway:
+      routes:
+        # curl http://127.0.0.1:8088/provider/info/customer
+        - id: dubbo-provider
+          uri: lb://dubbo-provider
+          predicates:
+            - Path=/provider/**
+          filters:
+            - StripPrefix=1
