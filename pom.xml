@@ -20,6 +20,7 @@
         <spring-boot.version>2.3.7.RELEASE</spring-boot.version>
         <!-- https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E-->
         <spring-cloud-alibaba.version>2.2.6.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <dubbo-registry-nacos.version>2.7.8</dubbo-registry-nacos.version>
 
         <mysql-connector.version>8.0.22</mysql-connector.version>
@@ -39,6 +40,7 @@
         <module>start</module>
         <module>ddd-web-dubbo-provider</module>
         <module>ddd-web-commons</module>
+        <module>ddd-web-gateway</module>
     </modules>
 
     <dependencies>
@@ -94,6 +96,15 @@
                 <artifactId>dubbo-registry-nacos</artifactId>
                 <version>${dubbo-registry-nacos.version}</version>
             </dependency>
+            <!-- spring cloud start -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring cloud start -->
             <!--  只需要在parent中配置dependencies依赖，nacos的config和discovery可以在子项目中直接引用 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>

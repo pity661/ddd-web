@@ -16,7 +16,7 @@ spring:
   datasource:
     # DataSourceConfiguration#Hikari=>dataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${SERVER_IP}:3307/dubbo_provider?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=true
+    url: jdbc:mysql://${SERVER_IP:localhost}:3307/dubbo_provider?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=true
     username: root
     password: root
     hikari:
@@ -43,7 +43,7 @@ spring:
       temp.use_jdbc_metadata_defaults: false
   # rabbitmq
   rabbitmq:
-    host: ${SERVER_IP}
+    host: ${SERVER_IP:localhost}
     port: 5672
     username: root
     password: root
@@ -103,7 +103,7 @@ dubbo:
 #    threads:
   registry:
 #    address: nacos://localhost:8848
-    address: nacos://${SERVER_IP}:8848
+    address: nacos://${SERVER_IP:localhost}:8848
   scan:
     base-packages: com.wenky.ddd.provider.dubbo.service.impl
   # 配置针对provider所有service生效
