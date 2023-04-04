@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.rpc.RpcContext;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * @program: ddd-web
@@ -39,6 +40,9 @@ public class HelloServiceImpl implements IHelloService {
     private final CustomProperties customProperties;
     private final CustomerService customerService;
 
+    @Value("${server.port}")
+    private String port;
+
     @Override
     public String getName() {
         return customProperties.getName();
@@ -49,6 +53,7 @@ public class HelloServiceImpl implements IHelloService {
         String index = RpcContext.getContext().getAttachment("index"); // 传递隐式参数
         log.info("attachment, index:{}", index);
         Customer customer = customerService.getByName(name);
+        customer.setPort(port);
         log.info(customer.toString());
         return customer;
     }

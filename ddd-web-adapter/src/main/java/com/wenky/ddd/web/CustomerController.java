@@ -34,6 +34,7 @@ public class CustomerController {
         return Response.buildSuccess();
     }
 
+    // dubbo
     // curl http://127.0.0.1:8080/info/wenky
     @GetMapping(value = "/info/wenky")
     public SingleResponse<CustomerCO> getWenky(HttpServletRequest request) {
@@ -42,6 +43,7 @@ public class CustomerController {
         return customerService.getCustomerInfo(customerQry);
     }
 
+    // local
     // curl http://127.0.0.1:8080/info/wendy
     @GetMapping(value = "/info/wendy")
     public SingleResponse<CustomerCO> getWendy(HttpServletRequest request) {

@@ -16,6 +16,7 @@ spring:
   datasource:
     # DataSourceConfiguration#Hikari=>dataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # SERVER_IP=10.100.19.191
     url: jdbc:mysql://${SERVER_IP:localhost}:3307/dubbo_provider?useSSL=false&useUnicode=true&characterEncoding=UTF-8&useServerPrepStmts=true
     username: root
     password: root

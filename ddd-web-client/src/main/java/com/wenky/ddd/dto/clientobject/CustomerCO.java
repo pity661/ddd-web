@@ -13,4 +13,6 @@ public class CustomerCO extends AbstractCO {
     private String name;
     private String phone;
     private Integer age;
+
+    private String port;
 }

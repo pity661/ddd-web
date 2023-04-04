@@ -5,12 +5,34 @@ spring:
   application:
     name: ddd-web-gateway
   cloud:
+    sentinel:
+      transport:
+        dashboard: http://${SERVER_IP:localhost}:8858
+#        dashboard: http://localhost:8858
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]': # 匹配所有请求
+            allowedOrigins: "*" # 跨域处理 允许所有的域
+            allowedMethods: # 支持的方法
+              - GET
+              - POST
       routes:
         # curl http://127.0.0.1:8088/provider/info/customer
         - id: dubbo-provider
-          uri: lb://dubbo-provider
+          # loadBalanceClient
+          uri: lb://dubbo-provider # ws(websocket)、http、lb
+          # org.springframework.cloud.gateway.handler.predicate
           predicates:
             - Path=/provider/**
-          filters:
-            - StripPrefix=1
+          # 会和default的同时生效
+#          filters:
+#            - StripPrefix=1
+          # 优先级，数字越小，优先级越高 default 0
+          order: -1
+        - id: dubbo-consumer
+          uri: lb://dubbo-consumer
+          predicates:
+            - Path=/consumer/**
+      default-filters:
+        - StripPrefix=1
