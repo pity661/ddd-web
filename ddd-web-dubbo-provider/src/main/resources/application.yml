@@ -83,6 +83,9 @@ management:
         include: '*'
 
 dubbo:
+  cloud:
+    # 避免提示Current application will subscribe all services
+    subscribed-services: /
   application:
     name: dubbo-provider
   config-center:
