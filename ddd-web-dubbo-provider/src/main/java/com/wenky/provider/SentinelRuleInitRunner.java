@@ -30,12 +30,13 @@ public class SentinelRuleInitRunner implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
 
         FlowRule flowRule = new FlowRule();
+        // 针对单个方法配置资源限制
         // com.wenky.provider.dubbo.service.IHelloService:getWrapperByName(java.lang.String)
         flowRule.setResource("com.wenky.provider.dubbo.service.IHelloService");
         flowRule.setGrade(RuleConstant.FLOW_GRADE_QPS);
         flowRule.setCount(5d);
         // ResourceTypeConstants.COMMON_RPC
-        flowRule.setLimitApp("default");
+        flowRule.setLimitApp("default"); // dubbo.application.name
         flowRule.setStrategy(RuleConstant.STRATEGY_DIRECT);
         // 流量控制效果 0直接拒绝，1Warm Up，2匀速排队
         flowRule.setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_DEFAULT);

@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class CustomerDO {
 
+    private Long id;
     private String name;
     private Integer age;
     private String phone;

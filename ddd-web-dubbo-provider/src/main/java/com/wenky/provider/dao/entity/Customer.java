@@ -1,9 +1,8 @@
 package com.wenky.provider.dao.entity;
 
-import lombok.Data;
-
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import lombok.Data;
 
 /**
  * @program: ddd-web
@@ -18,6 +17,5 @@ public class Customer extends BaseEntity {
     private String name;
     private Integer age;
     private String phone;
-    @Transient
-    private String port;
+    @Transient private String port;
 }

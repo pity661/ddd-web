@@ -1,5 +1,6 @@
 package com.wenky.provider.controller;
 
+import com.alibaba.cola.dto.SingleResponse;
 import com.wenky.provider.dao.entity.Customer;
 import com.wenky.provider.service.CustomerService;
 import java.util.concurrent.TimeUnit;
@@ -29,8 +30,10 @@ public class CustomerController {
 
     // curl http://127.0.0.1:8081/info/customer
     @GetMapping(value = "/info/customer")
-    public Customer name(HttpServletRequest request) {
-        return customerService.getByName("wenky");
+    public SingleResponse<Customer> name(HttpServletRequest request) {
+        Customer customer = customerService.getByName("wenky");
+        customer.setPort(port);
+        return SingleResponse.of(customer);
     }
 
     // curl http://127.0.0.1:8081/sleep
@@ -42,10 +45,10 @@ public class CustomerController {
 
     // curl "http://127.0.0.1:8081/sentinel?name=wenky"
     @GetMapping(value = "/sentinel")
-    public Customer sentinel(
+    public SingleResponse<Customer> sentinel(
             @RequestParam(required = false) String name, HttpServletRequest request) {
         Customer customer = customerService.getByName(name);
         customer.setPort(port);
-        return customer;
+        return SingleResponse.of(customer);
     }
 }

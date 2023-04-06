@@ -28,6 +28,11 @@
             <groupId>com.wenky.cola.ddd.web</groupId>
             <artifactId>ddd-web-commons</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <!--nacos modules-->
         <dependency>

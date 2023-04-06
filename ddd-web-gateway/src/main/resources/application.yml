@@ -7,8 +7,9 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: http://${SERVER_IP:localhost}:8858
 #        dashboard: http://localhost:8858
+        dashboard: http://${SERVER_IP:localhost}:8858
+      eager: true
     gateway:
       globalcors:
         cors-configurations:

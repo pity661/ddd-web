@@ -22,7 +22,7 @@ spring:
 
 dubbo:
   application:
-    name: dubbo-consumer
+    name: ${spring.application.name}
   config-center:
     namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
     logger: slf4j

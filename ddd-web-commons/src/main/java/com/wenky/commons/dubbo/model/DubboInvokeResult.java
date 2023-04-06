@@ -37,7 +37,7 @@ public class DubboInvokeResult<T> implements Serializable {
         this.message = handleResult.getMessage();
     }
 
-    public static DubboInvokeResult newInstance(HandleResult handleResult, Throwable exception) {
+    public static DubboInvokeResult<?> newInstance(HandleResult handleResult, Throwable exception) {
         return DubboInvokeResult.builder()
                 .code(handleResult.getCode())
                 .message(
@@ -48,8 +48,8 @@ public class DubboInvokeResult<T> implements Serializable {
                 .build();
     }
 
-    public static DubboInvokeResult exception(Throwable exception) {
-        DubboInvokeResult result =
+    public static DubboInvokeResult<?> exception(Throwable exception) {
+        DubboInvokeResult<?> result =
                 DubboInvokeResult.newInstance(HandleResult.fetch(exception), exception);
         // 避免某些类导致不能序列化问题，将exception变为字符串
         result.setException(new Exception(result.getException().getMessage()));
@@ -57,12 +57,20 @@ public class DubboInvokeResult<T> implements Serializable {
     }
 
     public static <T> DubboInvokeResult<T> success(T data) {
-        DubboInvokeResult dubboInvokeResult = new DubboInvokeResult(HandleResultEnum.SUCCESS);
+        DubboInvokeResult<T> dubboInvokeResult = new DubboInvokeResult(HandleResultEnum.SUCCESS);
         dubboInvokeResult.setData(data);
         return dubboInvokeResult;
     }
 
     public void wrapperRpcException() {
         this.exception = new RpcException(this.exception);
+    }
+
+    public Boolean success() {
+        return HandleResultEnum.SUCCESS.getCode().equals(code);
+    }
+
+    public Boolean fail() {
+        return Boolean.FALSE == success();
     }
 }

@@ -33,7 +33,8 @@ public class CustomerController {
         customerService.error();
         return Response.buildSuccess();
     }
-
+    // gateway
+    // curl http://127.0.0.1:8088/consumer/info/wenky
     // dubbo
     // curl http://127.0.0.1:8080/info/wenky
     @GetMapping(value = "/info/wenky")

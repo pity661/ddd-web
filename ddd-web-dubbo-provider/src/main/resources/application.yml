@@ -87,7 +87,7 @@ dubbo:
     # 避免提示Current application will subscribe all services
     subscribed-services: /
   application:
-    name: dubbo-provider
+    name: ${spring.application.name}
   config-center:
     namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
     logger: slf4j
