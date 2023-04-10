@@ -3,9 +3,11 @@ package com.wenky.provider.refresh;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @program: ddd-web
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author: wenky
  * @create: 2022-12-29 10:45
  */
-//@RefreshScope
+@RefreshScope
 @RestController
 @RequiredArgsConstructor
 public class RefreshController {
@@ -34,5 +36,9 @@ public class RefreshController {
     @GetMapping(value = "/all")
     public String all(HttpServletRequest request) {
         return refreshService.getProperties();
+    }
+
+    public static int random(int bound) {
+       return ThreadLocalRandom.current().nextInt(bound);
     }
 }

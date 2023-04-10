@@ -89,7 +89,7 @@ dubbo:
   application:
     name: ${spring.application.name}
   config-center:
-    namespace: 7c9923ad-98f2-4a24-a5c3-4840633a64c5
+    namespace: dev
     logger: slf4j
   protocol:
     port: 20880

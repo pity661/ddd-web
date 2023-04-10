@@ -1,5 +1,15 @@
 server:
   port: 8088
+  tomcat:
+    # 最大等待数 100
+    accept-count: 100
+    # 最大连接数 8192
+    max-connections: 8192
+    threads:
+      # 最大线程数 200
+      max: 200
+      # 最小等待线程数 10
+      min-spare: 10
 
 spring:
   application:
