@@ -1,4 +1,5 @@
 create database ddd_web;
+use ddd_web;
 drop table if exists customer;
 create table customer (
     id bigint auto_increment comment 'id主键'

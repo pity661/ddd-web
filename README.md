@@ -40,3 +40,11 @@ common
 
 ### TODO LIST
 优雅启动，处理内存队列中的数据
+
+### 项目启动顺序和相关参数
+start - 
+
+```
+nacos: 
+sentinel: http://localhost:8858/#/dashboard
+```

@@ -29,5 +29,5 @@ app:
   config:
     log:
       level: INFO
-      path: /Users/huwenqi/Documents/wenky/java/ddd-web/start
+      path: ${PWD}/start
       file: ${app.config.log.path}/application.log

@@ -1,13 +1,12 @@
 package com.wenky.provider.refresh;
 
+import java.util.concurrent.ThreadLocalRandom;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @program: ddd-web
@@ -39,6 +38,6 @@ public class RefreshController {
     }
 
     public static int random(int bound) {
-       return ThreadLocalRandom.current().nextInt(bound);
+        return ThreadLocalRandom.current().nextInt(bound);
     }
 }

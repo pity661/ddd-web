@@ -26,5 +26,5 @@ app:
   config:
     log:
       level: INFO
-      path: /Users/huwenqi/Documents/wenky/java/ddd-web/ddd-web-dubbo-provider
+      path: ${PWD}/ddd-web-dubbo-provider
       file: ${app.config.log.path}/application.log
