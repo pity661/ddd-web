@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @program: ddd-web
@@ -16,7 +15,6 @@ import org.springframework.context.annotation.Configuration;
  * @create: 2023-03-30 14:09
  */
 @Slf4j
-@Configuration
 @RequiredArgsConstructor
 public class RabbitMqConfig
         implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback {

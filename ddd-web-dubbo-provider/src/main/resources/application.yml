@@ -6,6 +6,8 @@ server:
   shutdown: graceful
 
 spring:
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
   lifecycle:
     # 优雅停机缓冲期，最大等待时间
     timeout-per-shutdown-phase: 30s
@@ -44,6 +46,7 @@ spring:
       temp.use_jdbc_metadata_defaults: false
   # rabbitmq
   rabbitmq:
+    enable: false
     host: ${SERVER_IP:localhost}
     port: 5672
     username: root
@@ -122,7 +125,7 @@ dubbo:
     # 限流配置
     executes:
     # 值为true，随机生成token。也可以指定token值。防止consumer绕过注册中心直接调用provider
-    token: true
+    token: false
     # 使用自定义ExceptionConvertFilter，禁用默认ExceptionFilter
     # provider排除sentinel的consumer过滤器
     filter: -exception,-sentinel.dubbo.consumer.filter #--sentinel.dubbo.provider.filter # 禁用sentinel功能

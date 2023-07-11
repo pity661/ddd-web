@@ -5,6 +5,8 @@ import com.wenky.provider.framework.rabbitmq.RabbitMqQueueEnum;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class RabbitMqController {
 
-    private final RabbitMqProvider rabbitMqProvider;
+    @Autowired @Lazy private RabbitMqProvider rabbitMqProvider;
 
     // curl -X POST "http://127.0.0.1:8081/provider?content=aa"
     @PostMapping(value = "/provider")

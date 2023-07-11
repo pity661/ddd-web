@@ -22,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class RabbitMqConsumer {
 
-    private final RabbitMqProvider rabbitMqProvider;
+    @Autowired @Lazy private RabbitMqProvider rabbitMqProvider;
     @Autowired @Lazy private RabbitMqConsumer rabbitMqConsumer;
 
     @RabbitListener(queues = "ddd_web.direct.queue")

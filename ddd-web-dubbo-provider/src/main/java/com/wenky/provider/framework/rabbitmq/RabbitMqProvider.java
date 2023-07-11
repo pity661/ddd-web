@@ -8,7 +8,9 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * @program: ddd-web
@@ -17,7 +19,8 @@ import org.springframework.stereotype.Component;
  * @create: 2023-03-30 14:19
  */
 @Slf4j
-@Component
+@Configuration
+@ConditionalOnBean(RabbitAutoConfiguration.class)
 @RequiredArgsConstructor
 public class RabbitMqProvider {
 
