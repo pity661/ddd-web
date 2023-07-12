@@ -39,12 +39,14 @@ common
 主要负责技术细节问题的处理，比如数据库的CRUD、搜索引擎、文件系统、分布式服务的RPC等。此外，领域防腐的重任也落在这里，外部依赖需要通过gateway的转义处理，才能被上面的App层和Domain层使用。
 
 ### TODO LIST
-优雅启动，处理内存队列中的数据
+1、优雅启动，处理内存队列中的数据
+2、canal同步数据到ES
 
 ### 项目启动顺序和相关参数
 start - 
 
 ```
-nacos: 
+nacos: http://127.0.0.1:8848/nacos/#/login
 sentinel: http://localhost:8858/#/dashboard
 ```
+

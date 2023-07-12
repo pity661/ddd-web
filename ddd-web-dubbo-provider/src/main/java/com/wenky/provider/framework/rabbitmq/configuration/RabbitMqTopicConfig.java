@@ -1,7 +1,8 @@
-package com.wenky.provider.framework.rabbitmq.config;
+package com.wenky.provider.framework.rabbitmq.configuration;
 
 import com.wenky.provider.framework.rabbitmq.RabbitMqQueueEnum;
 import org.springframework.amqp.core.*;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @create: 2023-03-30 16:17
  */
 @Configuration
+@ConditionalOnBean(RabbitMqConfig.class)
 public class RabbitMqTopicConfig {
     RabbitMqQueueEnum topicConfig1 = RabbitMqQueueEnum.RABBITMQ_TOPIC_EXCHANGE_QUEUE;
     RabbitMqQueueEnum topicConfig2 = RabbitMqQueueEnum.RABBITMQ_TOPIC_EXCHANGE_SECOND_QUEUE;

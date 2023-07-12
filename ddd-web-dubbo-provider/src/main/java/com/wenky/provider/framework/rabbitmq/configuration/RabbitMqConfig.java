@@ -1,4 +1,4 @@
-package com.wenky.provider.framework.rabbitmq.config;
+package com.wenky.provider.framework.rabbitmq.configuration;
 
 import java.nio.charset.StandardCharsets;
 import javax.annotation.PostConstruct;

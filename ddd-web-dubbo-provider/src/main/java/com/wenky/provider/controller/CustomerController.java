@@ -43,6 +43,7 @@ public class CustomerController {
         return "SUCCESS";
     }
 
+    // should invoke by gateway
     // curl "http://127.0.0.1:8081/sentinel?name=wenky"
     @GetMapping(value = "/sentinel")
     public SingleResponse<Customer> sentinel(

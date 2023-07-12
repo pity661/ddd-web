@@ -1,4 +1,4 @@
-package com.wenky.provider.framework.rabbitmq.config;
+package com.wenky.provider.framework.rabbitmq.configuration;
 
 import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

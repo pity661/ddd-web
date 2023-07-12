@@ -1,0 +1,16 @@
+version: '3'
+services: 
+  canal:
+    image: canal/canal-server:latest
+    container_name: canal
+    privileged: true
+    env_file:
+      - ./env/canal.env
+    volumes:
+      - ./config/canal-server:/home/admim/canal-server/conf
+      - ./logs/canal-server:/home/admin/canal-server/logs
+    ports:
+      - "11110:11110"
+      - "11111:11111"
+      - "11112:11112"
+    restart: always

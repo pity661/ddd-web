@@ -1,8 +1,9 @@
-package com.wenky.provider.framework.rabbitmq.config;
+package com.wenky.provider.framework.rabbitmq.configuration;
 
 import com.wenky.provider.framework.rabbitmq.RabbitMqQueueEnum;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @create: 2023-03-30 18:14
  */
 @Configuration
+@ConditionalOnBean(RabbitMqConfig.class)
 public class RabbitMqFanoutConfig {
     RabbitMqQueueEnum fanoutConfig = RabbitMqQueueEnum.RABBITMQ_FANOUT_EXCHANGE_QUEUE;
 
