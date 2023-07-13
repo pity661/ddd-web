@@ -69,8 +69,8 @@ public class CanalClient {
     }
 
     /** 打印canal server解析binlog获得的实体类信息 */
-    private static void printEntry(List<CanalEntry.Entry> entrys) {
-        for (CanalEntry.Entry entry : entrys) {
+    private static void printEntry(List<CanalEntry.Entry> entryList) {
+        for (CanalEntry.Entry entry : entryList) {
             if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN
                     || entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONEND) {
                 // 开启/关闭事务的实体类型，跳过
@@ -78,31 +78,30 @@ public class CanalClient {
             }
             // RowChange对象，包含了一行数据变化的所有特征
             // 比如isDdl 是否是ddl变更操作 sql 具体的ddl sql beforeColumns afterColumns 变更前后的数据字段等等
-            CanalEntry.RowChange rowChage;
+            CanalEntry.RowChange rowChange;
             try {
-                rowChage = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
+                rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
             } catch (Exception e) {
                 throw new RuntimeException(
-                        "ERROR ## parser of eromanga-event has an error , data:" + entry.toString(),
-                        e);
+                        "ERROR ## parser of eromanga-event has an error , data:" + entry, e);
             }
             // 获取操作类型：insert/update/delete类型
-            CanalEntry.EventType eventType = rowChage.getEventType();
+            CanalEntry.EventType eventType = rowChange.getEventType();
             // 打印Header信息
             System.out.println(
                     String.format(
                             "================》; binlog[%s:%s] , name[%s,%s] , eventType : %s",
                             entry.getHeader().getLogfileName(),
                             entry.getHeader().getLogfileOffset(),
-                            entry.getHeader().getSchemaName(),
-                            entry.getHeader().getTableName(),
+                            entry.getHeader().getSchemaName(), // 库名
+                            entry.getHeader().getTableName(), // 表名
                             eventType));
             // 判断是否是DDL语句
-            if (rowChage.getIsDdl()) {
-                System.out.println("================》;isDdl: true,sql:" + rowChage.getSql());
+            if (rowChange.getIsDdl()) {
+                System.out.println("================》;isDdl: true,sql:" + rowChange.getSql());
             }
             // 获取RowChange对象里的每一行数据，打印出来
-            for (CanalEntry.RowData rowData : rowChage.getRowDatasList()) {
+            for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
                 // 如果是删除语句
                 if (eventType == CanalEntry.EventType.DELETE) {
                     printColumn(rowData.getBeforeColumnsList());
