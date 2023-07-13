@@ -1,0 +1,7 @@
+# 启动第一步
+network.host: 0.0.0.0
+discovery.type: single-node
+# 启动第二步
+xpack.security.enabled: true
+# docker restart重启es后进入容器设置密码
+# /usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive

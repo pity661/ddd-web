@@ -1,0 +1,7 @@
+# 启动第一步
+server.host: 0.0.0.0
+server.name: kibana
+elasticsearch.hosts: ["http://docker.for.mac.host.internal:9200"]
+# 启动第二步
+elasticsearch.username: "elastic"
+elasticsearch.password: "123456"

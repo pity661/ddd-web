@@ -1,0 +1,28 @@
+version: '3'
+services:
+  elasticsearch:
+    image: elasticsearch:7.17.0
+    container_name: elasticsearch
+    environment:
+      - "cluster.name=elasticsearch" #设置集群名称为elasticsearch
+      - "discovery.type=single-node" #以单一节点模式启动
+      - "ES_JAVA_OPTS=-Xms1024m -Xmx1024m" #设置使用jvm内存大小
+    volumes:
+      - ./data/elasticsearch/plugins:/usr/share/elasticsearch/plugins #插件文件挂载
+      - ./data/elasticsearch/data:/usr/share/elasticsearch/data #数据文件挂载
+      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml #配置文件挂载
+    ports:
+      - 9200:9200
+      - 9300:9300
+  kibana:
+    restart: always
+    image: kibana:7.17.0
+    container_name: kibana
+    depends_on:
+      - elasticsearch #kibana在elasticsearch启动之后再启动
+    environment:
+      - "elasticsearch.hosts=http://docker.for.mac.host.internal:9200" #设置访问elasticsearch的地址
+    volumes:
+      - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml #配置文件挂载
+    ports:
+      - 5601:5601
