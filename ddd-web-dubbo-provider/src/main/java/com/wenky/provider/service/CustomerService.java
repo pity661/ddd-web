@@ -13,4 +13,6 @@ public interface CustomerService {
     Customer getByName(String name);
 
     void update(Customer customer);
+
+    void elasticMove(String name);
 }

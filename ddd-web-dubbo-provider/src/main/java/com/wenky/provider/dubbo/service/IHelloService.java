@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  * @description:
  * @author: wenky
  * @create: 2022-12-29 14:01
+ * @dubbo
  */
 public interface IHelloService {
 

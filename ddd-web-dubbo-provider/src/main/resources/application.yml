@@ -6,8 +6,14 @@ server:
   shutdown: graceful
 
 spring:
+  elasticsearch:
+    rest:
+      username: elastic
+      password: 123456
+      uris: http://127.0.0.1:9200
+      connection-timeout: 5s
   canal:
-    enable: true
+    enable: false
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
   lifecycle:

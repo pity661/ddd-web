@@ -1,0 +1,21 @@
+{
+  "isStrict": false,
+  "allInOne": true,
+  "coverOld": true,
+  "outPath": "src/main/resources",
+  "projectName": "ddd-web-dubbo-provider",
+  "rpcApiDependencies":[{
+    "artifactId":"ddd-web-dubbo-provider",
+    "groupId":"com.wenky.cola.ddd.web",
+    "version":"1.0.0-SNAPSHOT"
+  }],
+  "revisionLogs": [
+    {
+      "version": "1.0",
+      "revisionTime": "2023-08-21 17:00:00",
+      "status": "create",
+      "author": "wenky",
+      "remarks": "初始化"
+    }
+  ]
+}

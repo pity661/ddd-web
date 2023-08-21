@@ -52,4 +52,11 @@ public class CustomerController {
         customer.setPort(port);
         return SingleResponse.of(customer);
     }
+
+    // curl "http://127.0.0.1:8081/elastic/move?name=wenky"
+    @GetMapping(value = "/elastic/move")
+    public void elasticMove(
+            @RequestParam(required = false) String name, HttpServletRequest request) {
+        customerService.elasticMove(name);
+    }
 }
